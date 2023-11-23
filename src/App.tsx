@@ -1,24 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
+import axios, {AxiosResponse} from 'axios';
+import CarouselBuilder from './components/Carousel';
 import './App.css';
 
 function App() {
+
+  const [movieData,setMovieData] = React.useState([]);
+
+  const getMovieData = async() => {
+    try {
+      const response: AxiosResponse = await axios.get('http://localhost:8080/api/v1/movies');
+      setMovieData(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
+  React.useEffect(() => {
+    getMovieData();
+  },[]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <p>Hello,World!</p>
+      <CarouselBuilder movieData ={movieData}/>
     </div>
   );
 }
