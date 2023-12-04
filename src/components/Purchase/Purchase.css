@@ -1,0 +1,21 @@
+
+.movie-purchase{
+    display: flex;
+    flex-direction: row;
+}
+
+
+.movie-poster-purchase{
+    width: 50%;
+    height: 80vh;
+    padding: 20px;
+    margin-left: 150px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.movie-poster-purchase > img{
+    border: 1px solid gold;
+    height:100%;
+    width:50%;
+}

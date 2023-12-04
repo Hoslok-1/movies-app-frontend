@@ -1,14 +1,21 @@
 import React from 'react';
 import './CarouselBuilder.css'
 import Carousel from "react-material-ui-carousel";
-import { Paper } from '@mui/material'
+import { Button,Paper } from '@mui/material'
 import Movie from '../../interfaces/Movie';
+import { useNavigate } from 'react-router-dom';
 
 interface CarouselBuilderProps {
   movieData:Movie[];
 }
 
 const CarouselBuilder = ({movieData}:CarouselBuilderProps) => {
+  const navigate = useNavigate();
+
+  const navigatePurchase = (movie:Movie) => {
+    const { imdbId,poster } = movie;
+    navigate(`/movie/${imdbId}/${encodeURIComponent(poster)}`);
+  };
   return (
     <div className='movie-carousel-container'>
       <Carousel>
@@ -24,6 +31,11 @@ const CarouselBuilder = ({movieData}:CarouselBuilderProps) => {
                       </div>
                       <div className="movie-title">
                         <h4>{movie.title}</h4>
+                      </div>
+                      <div className="buy-movie">
+                        <Button variant='contained' onClick={() => {
+                          navigatePurchase(movie)
+                        }}>buy ticket</Button>
                       </div>
                     </div>
                   </div>
