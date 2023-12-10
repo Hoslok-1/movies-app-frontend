@@ -1,11 +1,9 @@
-/* RegistrationForm.css */
-
 .registration-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #1a1a1a; /* Dark background color */
+    background-color: #1a1a1a; 
   }
   
   .registration-form {
@@ -13,13 +11,13 @@
     padding: 40px;
     border-radius: 8px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    background-color: #2a2a2a; /* Dark form background color */
+    background-color: #2a2a2a; 
     color: #fff;
   }
   
   h2 {
     text-align: center;
-    color: #4caf50; /* Accent color */
+    color: #4caf50;
   }
   
   .form-group {
