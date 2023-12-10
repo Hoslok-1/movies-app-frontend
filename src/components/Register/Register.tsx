@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import axios from 'axios';
 import './Register.css'
 const Register = () => {
 
@@ -14,10 +15,16 @@ const Register = () => {
       ...formData,
       [name]:value
     });
+
   };
 
   const handleSubmit = (e:any) => {
     e.preventDefault();
+    axios({
+      method:'post',
+      url:'http://localhost:8080/api/v1/users/add',
+      data:formData
+    });
     console.log("working");
   }
 
