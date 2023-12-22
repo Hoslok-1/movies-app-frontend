@@ -18,16 +18,36 @@ const Register = () => {
 
   };
 
-  const handleSubmit = (e:any) => {
+  const [errorRegister,setErrorRegister] = useState(false)
+
+  const handleSubmit = async (e:any) => {
     e.preventDefault();
-    axios({
-      method:'post',
-      url:'http://localhost:8080/api/v1/users/add',
-      data:formData
-    });
-    console.log("working");
+    try {
+      await axios({
+        method:'post',
+        url:'http://localhost:8080/api/v1/users/add',
+        data:formData
+      });
+      setErrorRegister(false)
+      resetFields();
+    } catch(e:any){
+
+      if(e.response.status === 400){
+        console.log("email already in use");
+      } else {
+        console.log("unexpected error")
+      }
+      setErrorRegister(true)
+    }
+
   }
 
+  const resetFields = () => {
+    setFormData({
+      email: '',
+      password: '',
+    });
+  };
 
   return (
     <div className="registration-container">
@@ -43,7 +63,7 @@ const Register = () => {
           <label htmlFor="password">Password:</label>
           <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} required />
         </div>
-
+        {errorRegister ? <p>Error!, Email already in use!</p> : <p></p>}
         <button type="submit" onClick={handleSubmit}>Register</button>
       </form>
     </div>
