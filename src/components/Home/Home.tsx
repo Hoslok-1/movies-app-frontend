@@ -1,9 +1,11 @@
 import React from 'react'
 import axios,{ AxiosResponse } from 'axios'
 import CarouselBuilder from '../Carousel/CarouselBuilder'
+
 const Home = () => {
 
   const [movieData,setMovieData] = React.useState([])
+
 
   const getAPIData = async () =>{
 

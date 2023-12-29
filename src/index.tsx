@@ -8,6 +8,7 @@ import About from './components/About/About';
 import Purchase from './components/Purchase/Purchase';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
+import { AuthProvider } from './AuthContext';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,7 +22,7 @@ const router = createBrowserRouter(
       <Route path='/register' element={<Register/>}> </Route>
     </>
   )
-)
+);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -29,7 +30,9 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <AuthProvider>
+      <RouterProvider router={router}/>
+    </AuthProvider>
   </React.StrictMode>
 );
 

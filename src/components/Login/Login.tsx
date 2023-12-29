@@ -1,15 +1,22 @@
 import React, { useState } from 'react'
-//import axios from 'axios';
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 import './Login.css'
+import { useAuth } from '../../AuthContext';
+
+
 
 const Login = () => {
-
+  const { login } = useAuth();
   const [formData,setFormData] = useState({
     email:"",
     password:""
   });
 
   console.log(formData);
+
+  const navigate = useNavigate();
+
   const handleChange = (e:any) => {
     const {name,value} = e.target;
     setFormData({
@@ -20,10 +27,23 @@ const Login = () => {
 
   };
 
+  const handleSubmit = async (e:any) => {
+    e.preventDefault();
+    try{
+      const response = await axios.post('http://localhost:8080/api/v1/users/login',formData);
+
+      console.log(response.data);
+      login();
+      navigate('/');
+    } catch(error:any){
+      console.log('Login failed',error.message);
+    }
+  }
+
 
   return (
     <div className="login-container">
-      <form className="login-form">
+      <form className="login-form" onSubmit={handleSubmit}>
         <h2>Please Login</h2>
 
         <div className="form-group">
