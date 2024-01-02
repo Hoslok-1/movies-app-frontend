@@ -34,6 +34,8 @@ const Login = () => {
 
       console.log(response.data);
       login();
+
+      window.localStorage.setItem("isLoggedIn",String(true));
       navigate('/');
     } catch(error:any){
       console.log('Login failed',error.message);
